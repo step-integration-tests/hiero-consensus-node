@@ -54,6 +54,11 @@ jobs:
     outputs:
       gcs-uri: ${{ steps.upload.outputs.gcs_uri || '' }}
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@b09bb98e06d4d774595224525879c09bc6e98c40 # v2.20.1
+        with:
+          egress-policy: audit
+
       - name: Prepare Runner
         id: prepare-runner
         uses: pandaswhocode/initialize-github-job@5dbfbc4329ceab48a57d983325dadbd3ec8123e9 # v1.2.2

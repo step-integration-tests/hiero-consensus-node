@@ -65,6 +65,11 @@ jobs:
       network-id: ${{ steps.read-chewie-response.outputs.network-id }}
       owner: ${{ steps.read-chewie-response.outputs.owner }}
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@b09bb98e06d4d774595224525879c09bc6e98c40 # v2.20.1
+        with:
+          egress-policy: audit
+
       - name: Initialize Job
         uses: pandaswhocode/initialize-github-job@5dbfbc4329ceab48a57d983325dadbd3ec8123e9 # v1.2.2
         with:
