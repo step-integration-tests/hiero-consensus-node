@@ -57,6 +57,11 @@ jobs:
       bn-mirror-node-version: ${{ steps.get-citr-vars.outputs.bn-mirror-node-version }}
       json-rpc-relay-version: ${{ steps.get-citr-vars.outputs.json-rpc-relay-version }}
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@351661ca32ac09a36dc5ee2d536e3128f2a3c8ed # v2.22.0
+        with:
+          egress-policy: audit
+
       - name: Initialize Job
         uses: pandaswhocode/initialize-github-job@5dbfbc4329ceab48a57d983325dadbd3ec8123e9 # v1.2.2
         with:
